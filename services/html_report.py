@@ -31,7 +31,7 @@ def generate_html_report(jobs, path="output/job_report.html"):
     <!DOCTYPE html>
     <html>
     <head>
-        <title>AI Job Filter Report</title>
+        <title>AI Job Intelligence Report</title>
         <style>
             body {{
                 font-family: Arial, sans-serif;
@@ -67,7 +67,7 @@ def generate_html_report(jobs, path="output/job_report.html"):
         </style>
     </head>
     <body>
-        <h1>AI Job Filter Report</h1>
+        <h1>AI Job Intelligence Report</h1>
         <p>Processed {len(jobs)} jobs.</p>
 
         <table>

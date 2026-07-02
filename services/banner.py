@@ -4,7 +4,7 @@ def print_banner():
     """
 
     print("=" * 50)
-    print("         AI JOB FILTER")
+    print("         AI JOB INTELLIGENCE")
     print(" Gmail + OpenAI + BeautifulSoup")
     print("=" * 50)
     print()

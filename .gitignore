@@ -216,3 +216,16 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# AI Job Intelligence local secrets and generated files
+credentials.json
+token.json
+sample_email.html
+
+# Generated reports
+output/*
+!output/.gitkeep
+
+# VS Code local settings
+.vscode/
+

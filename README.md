@@ -167,7 +167,7 @@ AI-Job-Filter/
 
 ```
 ==================================================
-         AI JOB FILTER
+         AI JOB INTELLIGENCE
  Gmail + OpenAI + BeautifulSoup
 ==================================================
 
