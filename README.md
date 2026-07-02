@@ -1,303 +1,108 @@
 # AI Job Intelligence
 
-An AI-powered job intelligence pipeline that automatically reads LinkedIn Job Alerts from Gmail, extracts job information from HTML emails, evaluates opportunities using OpenAI, and generates professional reports.
+![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python)
+![OpenAI](https://img.shields.io/badge/OpenAI-GPT--4.1-412991?logo=openai)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Status](https://img.shields.io/badge/Status-Active-success)
 
-Instead of manually reviewing dozens of job alerts every day, the system automatically scores each opportunity based on technical alignment, seniority, company fit, remote preference, compensation (when available), and overall relevance.
+An AI-powered job intelligence pipeline that automatically reads
+LinkedIn Job Alerts from Gmail, extracts structured job information from
+HTML emails, evaluates opportunities using OpenAI, and generates
+professional reports.
 
----
+Instead of manually reviewing dozens of job alerts every day, AI Job
+Intelligence prioritizes opportunities based on your own experience,
+technical background, and career goals.
+
+The scoring logic is prompt-driven, making it easy to adapt the
+application for nearly any technical profession without modifying the
+Python code.
 
 ## Features
 
-- Gmail API integration
-- OAuth2 authentication
-- HTML email extraction
-- BeautifulSoup HTML parsing
-- LinkedIn Job Alert parsing
-- Duplicate detection
-- AI-powered job evaluation using OpenAI
-- Structured JSON output
-- Interactive HTML dashboard
-- Modular Python architecture
+-   Gmail API integration
+-   OAuth2 authentication
+-   HTML email extraction
+-   BeautifulSoup HTML parsing
+-   LinkedIn Job Alert parsing
+-   Duplicate detection
+-   Prompt-driven OpenAI evaluation
+-   Structured JSON responses
+-   Executive summaries
+-   Color-coded HTML dashboard
+-   Modular Python architecture
+-   Easily customized for different careers
 
----
+## Demo
 
-# Example Workflow
+1.  Authenticate with Gmail
+2.  Read LinkedIn Job Alerts
+3.  Parse HTML into job objects
+4.  Remove duplicates
+5.  Score each opportunity with OpenAI
+6.  Categorize as High Value, Review, or Reject
+7.  Generate HTML and JSON reports
 
-```
-                Gmail API
-                    │
-                    ▼
-        LinkedIn Job Alert Emails
-                    │
-                    ▼
-         Extract HTML Email Body
-                    │
-                    ▼
-           BeautifulSoup Parser
-                    │
-                    ▼
-              Build Job Objects
-                    │
-                    ▼
-           Remove Duplicate Jobs
-                    │
-                    ▼
-           OpenAI Job Evaluation
-                    │
-                    ▼
-            Decision Engine
-                    │
-        ┌───────────┴───────────┐
-        ▼                       ▼
-   JSON Report            HTML Dashboard
+## Customize for Your Career
+
+Edit:
+
+``` text
+prompts/job_scoring.txt
 ```
 
----
+Update: - Background - Preferred industries - Roles to avoid - Decision
+thresholds
 
-# AI Evaluation
+No Python changes are required. Changing the prompt changes the
+behavior.
 
-Each job is evaluated using an LLM against a candidate profile including:
+## Technologies
 
-- Senior Solutions Engineering
-- Presales
-- Customer Discovery
-- Solution Architecture
-- Technical Workshops
-- APIs
-- AI
-- Cloud
-- UCaaS
-- CCaaS
-- Microsoft Teams Voice
+-   Python
+-   OpenAI API
+-   Gmail API
+-   BeautifulSoup4
+-   OAuth2
+-   HTML/CSS
+-   JSON
 
-The model returns:
+## Installation
 
-- Match Score (0-100)
-- Executive Summary
-- Decision
-- Supporting Reasons
-
-Example:
-
-```json
-{
-    "score": 85,
-    "summary": "Excellent senior remote Solutions Engineering opportunity with competitive compensation.",
-    "reasons": [
-        "Strong senior technical alignment.",
-        "Remote role matches preferred work style.",
-        "Competitive compensation.",
-        "Likely customer-facing technical role.",
-        "Industry alignment appears strong."
-    ]
-}
-```
-
----
-
-# Decision Categories
-
-| Score | Decision |
-|-------:|----------|
-| 80-100 | Jobs High-Value |
-| 60-79 | Jobs Review |
-| 0-59 | Jobs Reject |
-
----
-
-# Technologies Used
-
-- Python 3.14
-- OpenAI API
-- Gmail API
-- BeautifulSoup4
-- OAuth2
-- HTML
-- JSON
-- CSS
-
----
-
-# Project Structure
-
-```
-AI-Job-Filter/
-
-├── gmail/
-│   ├── gmail_client.py
-│   ├── gmail_loader.py
-│   ├── body_extractor.py
-│   ├── html_parser.py
-│   └── parser.py
-│
-├── jobs/
-│   └── job.py
-│
-├── prompts/
-│   └── job_scoring.txt
-│
-├── scoring/
-│   ├── llm_scorer.py
-│   └── rule_scorer.py
-│
-├── services/
-│   ├── loader.py
-│   ├── writer.py
-│   ├── summary.py
-│   ├── prompt_loader.py
-│   └── html_report.py
-│
-├── workflow/
-│   ├── decision_engine.py
-│   ├── duplicate_filter.py
-│   └── label_filter.py
-│
-├── output/
-│   ├── scored_jobs.json
-│   └── job_report.html
-│
-├── main.py
-├── requirements.txt
-└── README.md
-```
-
----
-
-# Example Console Output
-
-```
-==================================================
-         AI JOB INTELLIGENCE
- Gmail + OpenAI + BeautifulSoup
-==================================================
-
-[✓] Connected to Gmail
-
-[✓] Loaded 48 jobs
-
-[✓] Removed duplicates
-
-[✓] AI evaluation complete
-
-========================================
-JOB FILTER SUMMARY
-========================================
-
-Processed:      39
-High Value:      4
-Review:          3
-Reject:         32
-
-Average Score:  71.4
-
-========================================
-
-Reports generated successfully.
-```
-
----
-
-# HTML Dashboard
-
-The application generates a color-coded HTML report containing:
-
-- AI Score
-- Decision
-- Job Title
-- Company
-- Location
-- Salary
-- Executive Summary
-- AI Reasoning
-
-This makes it easy to quickly identify the most promising opportunities without opening every job posting.
-
----
-
-# Future Improvements
-
-- Gmail label automation
-- Automatic email archiving
-- Resume matching
-- Cover letter generation
-- Multi-job board support
-- Company enrichment
-- LinkedIn API integration
-- Scheduler for unattended execution
-
----
-
-# Installation
-
-Clone the repository
-
-```bash
-git clone https://github.com/YOUR_USERNAME/ai-job-intelligence.git
-
+``` bash
+git clone https://github.com/samrobinsonsd/ai-job-intelligence.git
 cd ai-job-intelligence
-```
-
-Create a virtual environment
-
-```bash
 python -m venv .venv
-```
-
-Activate
-
-Windows
-
-```bash
 .venv\Scripts\activate
-```
-
-Install dependencies
-
-```bash
 pip install -r requirements.txt
-```
-
-Create a `.env`
-
-```text
-OPENAI_API_KEY=your_openai_api_key
-```
-
-Add your Gmail OAuth credentials
-
-```
-credentials.json
-```
-
-Run
-
-```bash
 python main.py
 ```
 
----
+Create a `.env`:
 
-# Screenshots
+``` text
+OPENAI_API_KEY=your_openai_api_key
+```
 
-## HTML Dashboard
+Place your Gmail OAuth `credentials.json` in the project root.
 
-*(Add screenshot here)*
+## Why I Built This
 
-## Console Output
+I built this project to automate one of the most repetitive parts of a
+job search. It combines API integration, HTML parsing, prompt
+engineering, structured data processing, and workflow automation into a
+practical end-to-end AI application.
 
-*(Add screenshot here)*
+## Roadmap
 
----
+-   Resume embeddings
+-   Semantic job matching
+-   RAG-powered company research
+-   Company enrichment
+-   Docker deployment
+-   Multi-job board support
+-   Historical analytics
 
-# Why I Built This
-
-I built this project to automate one of the most repetitive parts of a job search.
-
-Instead of manually reviewing every LinkedIn Job Alert, the pipeline automatically extracts job data, evaluates opportunities using an LLM, and produces structured reports that prioritize the most relevant positions.
-The project combines API integrations, prompt engineering, HTML parsing, structured data processing, and workflow automation into a practical end-to-end AI application.
-
----
-
-# License
+## License
 
 MIT License
