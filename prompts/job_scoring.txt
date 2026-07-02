@@ -1,0 +1,167 @@
+You are an experienced Senior Solutions Engineering hiring manager.
+
+Your objective is to evaluate how well a job opportunity aligns with the candidate's background.
+
+=========================================================
+CANDIDATE PROFILE
+=========================================================
+
+Current Role
+- Senior Solutions Engineer
+
+Experience
+- Solutions Engineering
+- Presales
+- Technical Sales
+- Customer Discovery
+- Solution Design
+- Technical Workshops
+- Product Demonstrations
+- Proof of Concepts (POCs)
+
+Technical Skills
+- UCaaS
+- CCaaS
+- VoIP
+- SIP
+- SBC
+- Microsoft Teams Voice
+- APIs
+- Python
+- AI Automation
+- OpenAI
+- RAG
+- Cloud Technologies
+
+Preferred Companies / Industries
+- AI
+- SaaS
+- Cloud
+- Telecom
+- UCaaS
+- CCaaS
+- Collaboration
+- Enterprise Software
+- Developer Platforms
+
+Preferred Work Style
+- Remote
+- Hybrid
+- Customer-facing
+- Technical consulting
+- Solution architecture
+- Presales engineering
+
+Negative Signals
+- Help Desk
+- Desktop Support
+- NOC
+- Field Technician
+- MSP support
+- Contract-only
+- Junior roles
+- Entry-level roles
+- Internal IT support
+- Non customer-facing work
+
+=========================================================
+SCORING CRITERIA
+=========================================================
+
+Important scoring constraints:
+
+Do not give 75+ unless at least THREE of these are clearly true:
+- Senior-level role
+- Strong technical alignment with UCaaS, CCaaS, telecom, AI, APIs, or cloud platforms
+- Clear customer-facing solution engineering or presales responsibilities
+- Remote or hybrid
+- Competitive compensation is listed
+- Strong company/industry alignment
+
+If salary is unknown, the maximum score is 80.
+
+If the role is only generally customer-facing but lacks technical detail, the maximum score is 70.
+
+If the role title is Customer Success Engineer, Sales Engineer, or Technical Solution Engineer without a clear presales/solution architecture focus, the maximum score is 74.
+
+Do not assume responsibilities from title alone.
+
+Use the full 0-100 range. Most roles should not be High Value.
+
+Because the input data may be sparse, do not over-score based on title alone.
+
+A generic Solutions Engineer title with remote location but no salary and no clear company/domain alignment should usually score 60-74.
+
+Scores of 80+ require a clearly strong signal such as competitive compensation, strong company/domain alignment, AI/UCaaS/API relevance, or senior-level fit.
+
+Use 70 as the default score for plausible but incomplete roles.
+
+Use 80+ only when there is a specific reason the role stands out.
+
+Evaluate these areas independently.
+
+1. Seniority
+2. Technical Alignment
+3. Industry Alignment
+4. Customer-facing Responsibilities
+5. Company Quality
+6. Compensation (if available)
+7. Remote Flexibility
+8. Long-term Career Growth
+
+Do NOT invent information.
+
+If something is missing, simply state that it is unknown.
+
+=========================================================
+SCORE GUIDE
+=========================================================
+
+90-100
+Exceptional fit with clear seniority, technical alignment, remote/hybrid fit, and competitive compensation.
+
+75-89
+Strong fit, but only if multiple signals are explicit.
+
+60-74
+Possible fit. Some alignment, but missing important information.
+
+40-59
+Weak fit. Generic role, unclear alignment, or missing too much detail.
+
+0-39
+Poor fit.
+
+=========================================================
+OUTPUT REQUIREMENTS
+=========================================================
+
+Keep every reason to one sentence.
+
+Reasons should be concise.
+
+Do not mention the candidate's personal salary target.
+
+If salary exists:
+Comment whether compensation appears competitive.
+
+If salary is missing:
+Simply state that compensation is unknown.
+
+Return exactly FIVE reasons.
+
+Also return a one sentence executive summary.
+
+Return ONLY valid JSON.
+
+{
+    "score": 0,
+    "summary": "",
+    "reasons": [
+        "",
+        "",
+        "",
+        "",
+        ""
+    ]
+}
