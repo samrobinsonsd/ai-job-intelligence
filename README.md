@@ -1,61 +1,162 @@
 # AI Job Intelligence
 
+An AI-powered job intelligence pipeline that automatically reads LinkedIn Job Alerts from Gmail, evaluates each opportunity with OpenAI, and generates actionable reports.
+
 ![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python)
 ![OpenAI](https://img.shields.io/badge/OpenAI-GPT--4.1-412991?logo=openai)
 ![License](https://img.shields.io/badge/License-MIT-green)
 ![Status](https://img.shields.io/badge/Status-Active-success)
 
-An AI-powered job intelligence pipeline that automatically reads
-LinkedIn Job Alerts from Gmail, extracts structured job information from
-HTML emails, evaluates opportunities using OpenAI, and generates
-professional reports.
+## Why This Exists
 
-Instead of manually reviewing dozens of job alerts every day, AI Job
-Intelligence prioritizes opportunities based on your own experience,
-technical background, and career goals.
+During my job search I found myself spending more time sorting through LinkedIn Job Alert emails than actually applying for positions.
 
-The scoring logic is prompt-driven, making it easy to adapt the
-application for nearly any technical profession without modifying the
-Python code.
+Keyword filtering wasn't enough. Job titles are inconsistent, salary information is often missing, and determining whether a role is actually a good fit still required opening every posting.
+
+Rather than continue doing that manually, I built a pipeline that performs the first pass for me.
+
+The application reads job alerts directly from Gmail, extracts structured information from the HTML, evaluates each opportunity against a customizable candidate profile using an LLM, and generates reports explaining why each position is worth pursuing, reviewing, or rejecting.
 
 ## Features
 
--   Gmail API integration
--   OAuth2 authentication
--   HTML email extraction
--   BeautifulSoup HTML parsing
--   LinkedIn Job Alert parsing
--   Duplicate detection
--   Prompt-driven OpenAI evaluation
--   Structured JSON responses
--   Executive summaries
--   Color-coded HTML dashboard
--   Modular Python architecture
--   Easily customized for different careers
+- **Gmail API Integration**
+- **OAuth2 Authentication**
+- **BeautifulSoup HTML Parsing**
+- **OpenAI Job Evaluation**
+- **Interactive HTML Dashboard**
+- **Prompt-Driven Scoring**
 
 ## Demo
 
-1.  Authenticate with Gmail
-2.  Read LinkedIn Job Alerts
-3.  Parse HTML into job objects
-4.  Remove duplicates
-5.  Score each opportunity with OpenAI
-6.  Categorize as High Value, Review, or Reject
-7.  Generate HTML and JSON reports
+**Console**
+
+![Console](images/console.png)
+
+
+**Dashboard**
+
+![Dashboard](images/dashboard.png)
+
+## Workflow
+```bash
+LinkedIn Job Alerts
+          │
+          ▼
+      Gmail API
+          │
+          ▼
+   HTML Extraction
+          │
+          ▼
+    BeautifulSoup
+          │
+          ▼
+ Structured Job Objects
+          │
+          ▼
+ Duplicate Detection
+          │
+          ▼
+     OpenAI Scoring
+          │
+          ▼
+   Decision Engine
+          │
+     ┌────┴────┐
+     ▼         ▼
+ JSON      HTML Report
+ ```
+
+## AI Evaluation
+
+Each opportunity is evaluated using an OpenAI model.
+
+The model considers things such as:
+
+- Technical alignment
+- Seniority
+- Remote preference
+- Industry
+- Compensation (when available)
+- Overall relevance
+
+The response is returned as structured JSON.
+
+```bash
+{
+    "score": 88,
+    "decision": "High Value",
+    "summary": "...",
+    "reasons": [
+        "...",
+        "...",
+        "..."
+    ]
+}
+```
 
 ## Customize for Your Career
 
-Edit:
+One of the goals of this project was to avoid hardcoding career logic into Python.
 
-``` text
-prompts/job_scoring.txt
-```
+Everything that determines what makes a good job lives inside a single prompt.
 
-Update: - Background - Preferred industries - Roles to avoid - Decision
-thresholds
+Edit: `prompts/job_scoring.txt`
 
-No Python changes are required. Changing the prompt changes the
-behavior.
+You can customize:
+
+- Technical background
+- Preferred industries
+- Desired job titles
+- Technologies
+- Preferred locations
+- Salary expectations
+- Roles to avoid
+- Decision thresholds
+
+Changing careers does not require changing the code.
+
+Update the prompt.
+
+Run the application.
+
+Done.
+
+Whether you're a:
+
+- Software Engineer
+- Cloud Engineer
+- Data Scientist
+- DevOps Engineer
+- Security Engineer
+- Product Manager
+
+the application can be adapted by editing one file.
+
+## Architecture
+
+The project intentionally separates:
+
+**Python**
+
+Responsible for:
+
+- Authentication
+- Parsing
+- Data processing
+- Reporting
+- Workflow
+
+**Prompt**
+
+Responsible for:
+
+- Candidate profile
+- Business logic
+- Scoring behavior
+- Decision reasoning
+
+This keeps the application reusable while allowing the evaluation criteria to evolve without changing the underlying code.
 
 ## Technologies
 
@@ -71,14 +172,20 @@ behavior.
 
 ``` bash
 git clone https://github.com/samrobinsonsd/ai-job-intelligence.git
+
 cd ai-job-intelligence
+
 python -m venv .venv
+
+# Windows
+
 .venv\Scripts\activate
+
 pip install -r requirements.txt
-python main.py
+
 ```
 
-Create a `.env`:
+Create a `.env` and place your OpenAI API key there, example below:
 
 ``` text
 OPENAI_API_KEY=your_openai_api_key
@@ -86,22 +193,26 @@ OPENAI_API_KEY=your_openai_api_key
 
 Place your Gmail OAuth `credentials.json` in the project root.
 
-## Why I Built This
-
-I built this project to automate one of the most repetitive parts of a
-job search. It combines API integration, HTML parsing, prompt
-engineering, structured data processing, and workflow automation into a
-practical end-to-end AI application.
+![Credentials](images/credentials.png)
 
 ## Roadmap
 
--   Resume embeddings
--   Semantic job matching
--   RAG-powered company research
--   Company enrichment
--   Docker deployment
--   Multi-job board support
--   Historical analytics
+- Gmail label automation
+- Automatic email archiving
+- Resume embedding
+- Semantic job matching
+- Company enrichment
+- RAG-powered company research
+- Multi-job board support
+- Recruiter quality scoring
+- Docker deployment
+- Historical analytics dashboard
+
+## Why I Built This
+
+This project started as a way to reduce the repetitive work involved in searching for jobs.
+
+It ended up becoming a practical way to learn API integration, prompt engineering, HTML parsing, structured data processing, workflow design, and Python application architecture by solving a real problem instead of building another tutorial project.
 
 ## License
 
