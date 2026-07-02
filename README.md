@@ -30,12 +30,12 @@ The application reads job alerts directly from Gmail, extracts structured inform
 
 **Console**
 
-![Console](images/console.png)
+![Console](images/console1.png)
 
 
 **Dashboard**
 
-![Dashboard](images/dashboard.png)
+![Dashboard](images/dashboard1.png)
 
 ## Workflow
 ```bash
@@ -193,7 +193,7 @@ OPENAI_API_KEY=your_openai_api_key
 
 Place your Gmail OAuth `credentials.json` in the project root.
 
-![Credentials](images/credentials.png)
+![Credentials](images/credentials1.png)
 
 ## Roadmap
 
