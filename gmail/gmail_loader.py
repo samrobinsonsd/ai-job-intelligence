@@ -41,7 +41,7 @@ def load_jobs_from_gmail(query='label:Jobs', max_results=10):
         for job in parsed_jobs:
             job.message_id = message["id"]
 
-            # Add all parsed jobs to the master jobs list.
+        # Add all parsed jobs to the master jobs list.
         jobs.extend(parsed_jobs)
 
-        return jobs
+    return jobs
