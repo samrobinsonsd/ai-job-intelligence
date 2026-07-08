@@ -95,44 +95,6 @@ The response is returned as structured JSON.
 }
 ```
 
-## Customize for Your Career
-
-One of the goals of this project was to avoid hardcoding career logic into Python.
-
-Everything that determines what makes a good job lives inside a single prompt.
-
-Edit: `prompts/job_scoring.txt`
-
-You can customize:
-
-- Technical background
-- Preferred industries
-- Desired job titles
-- Technologies
-- Preferred locations
-- Salary expectations
-- Roles to avoid
-- Decision thresholds
-
-Changing careers does not require changing the code.
-
-Update the prompt.
-
-Run the application.
-
-Done.
-
-Whether you're a:
-
-- Software Engineer
-- Cloud Engineer
-- Data Scientist
-- DevOps Engineer
-- Security Engineer
-- Product Manager
-
-the application can be adapted by editing one file.
-
 ## Architecture
 
 The project intentionally separates:
@@ -194,6 +156,78 @@ OPENAI_API_KEY=your_openai_api_key
 Place your Gmail OAuth `credentials.json` in the project root.
 
 ![Credentials](images/credentials1.png)
+
+## Customize for Your Career
+
+One of the goals of this project was to avoid hardcoding career logic into Python.
+
+Everything that determines what makes a good job lives inside a single prompt.
+
+Edit: `prompts/job_scoring.txt`
+
+The scoring prompt can be modified to evaluate opportunities against your own experience, technical background, and career goals.
+
+Update the evaluation prompt in the prompt configuration file with information relevant to your background.
+
+Consider including:
+
+- Current and previous roles
+- Technical skills and platforms
+- Industry experience
+- Preferred job functions
+- Target roles
+- Seniority level
+- Technologies or domains you want to prioritize
+- Roles or industries you want to avoid
+
+The application uses this context to score and classify each opportunity as:
+
+- `HIGH_VALUE`
+- `REVIEW`
+- `REJECT`
+
+More detailed and specific background information generally produces more relevant scoring results.
+
+## Usage
+
+Run the application from the project root:
+```bash
+python main.py
+```
+The application will:
+
+1. Authenticate with Gmail
+2. Retrieve LinkedIn Job Alert emails
+3. Extract job listings from the email HTML
+4. Remove duplicate opportunities
+5. Evaluate each job using the configured OpenAI prompt
+6. Score and classify each opportunity
+7. Apply Gmail labels and archive rejected jobs
+8. Generate JSON and HTML reports
+
+### Adjusting the Number of Emails Processed
+
+The number of Gmail messages processed per run is controlled in `main.py`.
+
+Find:
+```bash
+jobs = load_jobs_from_gmail(
+    query="label:Jobs",
+    max_results=1
+)
+``` 
+
+Change `max_results` to the number of Job Alert emails you want to process:
+
+```bash
+jobs = load_jobs_from_gmail(
+    query="label:Jobs",
+    max_results=10
+)
+```
+`max_results` controls the number of Gmail messages retrieved, not the total number of jobs.
+
+A single LinkedIn Job Alert email may contain multiple job listings. For example, processing 10 emails may produce 40 or more jobs before or after deduplication depending on the contents of the alerts.
 
 ## Roadmap
 
