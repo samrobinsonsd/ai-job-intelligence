@@ -18,6 +18,11 @@ from workflow.duplicate_filter import deduplicate_jobs
 from utils.logger import setup_logger
 from services.job_page_fetcher import fetch_job_page
 from services.job_page_parser import parse_job_description
+from services.job_page_parser import (
+    parse_job_description,
+    parse_salary_from_description,
+    parse_compensation_from_description
+)
 
 logger = setup_logger()
 
@@ -56,6 +61,13 @@ for job in jobs:
         job.description = parse_job_description(
             html
         )
+           
+        description_salary = parse_salary_from_description(
+            job.description
+        )
+
+        if description_salary > job.salary:
+            job.salary = description_salary
 
         logger.info(
             "JOB ENRICHED | title=%s | company=%s | description_length=%s",
@@ -138,16 +150,25 @@ for job in jobs:
 
         raise
 
-    apply_label(
-        job.message_id,
-        job.decision
-    )
+    try:
+        apply_label(
+            job.message_id,
+            job.decision
+        )
 
-    logger.info(
-        "GMAIL LABEL | company=%s | label=%s",
-        job.company,
-        job.decision
-    )
+        logger.info(
+            "GMAIL LABEL | company=%s | label=%s",
+            job.company,
+            job.decision
+        )
+
+    except Exception:
+        logger.exception(
+            "GMAIL LABEL FAILED | company=%s | label=%s",
+            job.company,
+            job.decision
+        )
+
 
     print(
         f"[✓] {len(processed_jobs) + 1}/{total} "

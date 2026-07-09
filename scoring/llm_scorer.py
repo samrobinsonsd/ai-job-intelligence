@@ -17,24 +17,16 @@ client = OpenAI(
 def clean_json_response(content):
     """
     Removes Markdown code fences from an LLM response
-    so json.loads() can parse the raw JSON.
+    before JSON parsing.
     """
 
     content = content.strip()
 
     if content.startswith("```json"):
-        content = content.replace(
-            "```json",
-            "",
-            1
-        )
+        content = content[7:]
 
-    if content.startswith("```"):
-        content = content.replace(
-            "```",
-            "",
-            1
-        )
+    elif content.startswith("```"):
+        content = content[3:]
 
     if content.endswith("```"):
         content = content[:-3]
@@ -42,9 +34,37 @@ def clean_json_response(content):
     return content.strip()
 
 
+def normalize_compensation_type(compensation_type):
+    """
+    Normalizes compensation types returned by the LLM.
+    """
+
+    value = str(
+        compensation_type or ""
+    ).strip().lower()
+
+    compensation_types = {
+        "base": "Base Salary",
+        "base salary": "Base Salary",
+        "base pay": "Base Salary",
+        "ote": "OTE",
+        "on-target earnings": "OTE",
+        "on target earnings": "OTE",
+        "salary": "Salary",
+        "hourly": "Hourly",
+        "unknown": "Unknown",
+        "": "Unknown"
+    }
+
+    return compensation_types.get(
+        value,
+        "Unknown"
+    )
+
+
 def score_job_llm(job):
     """
-    Scores a Job object using OpenAI.
+    Scores and enriches a Job object using OpenAI.
 
     Returns:
         tuple: score, summary, reasons
@@ -55,16 +75,19 @@ def score_job_llm(job):
     )
 
     job_context = f"""
-Job:
+=========================================================
+JOB DATA
+=========================================================
 
 Title: {job.title}
 Company: {job.company}
 Location: {job.location}
-Salary: {job.salary}
 Source: {job.source}
 URL: {job.url}
 
-Job Description:
+=========================================================
+JOB DESCRIPTION
+=========================================================
 
 {job.description}
 """
@@ -99,8 +122,41 @@ Job Description:
         clean_content
     )
 
-    score = result["score"]
-    summary = result["summary"]
+    score = int(
+        result["score"]
+    )
+
+    summary = str(
+        result["summary"]
+    ).strip()
+
     reasons = result["reasons"]
+
+    job.compensation_min = int(
+        result.get(
+            "compensation_min",
+            0
+        )
+        or 0
+    )
+
+    job.compensation_max = int(
+        result.get(
+            "compensation_max",
+            0
+        )
+        or 0
+    )
+
+    job.compensation_type = (
+        normalize_compensation_type(
+            result.get(
+                "compensation_type",
+                "Unknown"
+            )
+        )
+    )
+
+    job.salary = job.compensation_max
 
     return score, summary, reasons

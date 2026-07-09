@@ -6,18 +6,22 @@ class Job:
         company,
         location,
         salary=0,
+        compensation_min=0,
+        compensation_max=0,
+        compensation_type="",
         source="Unknown",
         url="",
-        description="",
         labels=None
     ):
         self.title = title
         self.company = company
         self.location = location
         self.salary = salary
+        self.compensation_min = compensation_min
+        self.compensation_max = compensation_max
+        self.compensation_type = compensation_type
         self.source = source
         self.url = url
-        self.description = description
         self.labels = labels or []
         self.message_id = ""
         self.score = 0
@@ -42,19 +46,16 @@ class Job:
             company=data["company"],
             location=data["location"],
             salary=data.get("salary", 0),
+            compensation_min=data.get("compensation_min", 0),
+            compensation_max=data.get("compensation_max", 0),
+            compensation_type=data.get("compensation_type", ""),
             source=data.get("source", "Unknown"),
             url=data.get("url", ""),
-            description=data.get("description", ""),
-            labels=data.get("labels", [])
-        )
+            labels=data.get("labels", []),
+    )
 
     def __str__(self):
-        return (
-            f"{self.title} | "
-            f"{self.company} | "
-            f"{self.location} | "
-            f"${self.salary}"
-        )
+        return f"{self.title} | {self.company} | {self.location} | ${self.salary}"
 
     def to_dict(self):
         return {
@@ -63,9 +64,11 @@ class Job:
             "company": self.company,
             "location": self.location,
             "salary": self.salary,
+            "compensation_min": self.compensation_min,
+            "compensation_max": self.compensation_max,
+            "compensation_type": self.compensation_type,
             "source": self.source,
             "url": self.url,
-            "description": self.description,
             "labels": self.labels,
             "score": self.score,
             "decision": self.decision,
