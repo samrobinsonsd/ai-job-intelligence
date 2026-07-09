@@ -8,6 +8,7 @@ class Job:
         salary=0,
         source="Unknown",
         url="",
+        description="",
         labels=None
     ):
         self.title = title
@@ -16,6 +17,7 @@ class Job:
         self.salary = salary
         self.source = source
         self.url = url
+        self.description = description
         self.labels = labels or []
         self.message_id = ""
         self.score = 0
@@ -42,11 +44,17 @@ class Job:
             salary=data.get("salary", 0),
             source=data.get("source", "Unknown"),
             url=data.get("url", ""),
+            description=data.get("description", ""),
             labels=data.get("labels", [])
-    )
+        )
 
     def __str__(self):
-        return f"{self.title} | {self.company} | {self.location} | ${self.salary}"
+        return (
+            f"{self.title} | "
+            f"{self.company} | "
+            f"{self.location} | "
+            f"${self.salary}"
+        )
 
     def to_dict(self):
         return {
@@ -57,6 +65,7 @@ class Job:
             "salary": self.salary,
             "source": self.source,
             "url": self.url,
+            "description": self.description,
             "labels": self.labels,
             "score": self.score,
             "decision": self.decision,

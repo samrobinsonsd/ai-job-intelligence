@@ -230,3 +230,7 @@ output/*
 .vscode/
 
 README.bak
+
+# Logs
+logs/*
+!logs/.gitkeep
